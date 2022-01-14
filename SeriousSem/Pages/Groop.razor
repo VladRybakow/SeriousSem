@@ -2,11 +2,9 @@
 @using SeriousSem.Data
 @inject WeatherForecastService ForecastService
 
-<h3>Группа</h3>
+<h3>Данные о группа</h3>
 
-<p>Данные о группе</p>
-
-@if (forecasts == null)
+@if (DateGroops == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -15,20 +13,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Группа</th>
+                <th>Факультатив</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in DateGroop)
+            @foreach (var DateGrip in DateGroops)
             {
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>@DateGrip.name</td>
+                    <td>@DateGrip.surname</td>
+                    <td>@DateGrip.group</td>
+                    <td>@DateGrip.faculty</td>
                 </tr>
             }
         </tbody>
@@ -36,10 +34,6 @@ else
 }
 
 @code {
-    private LogicGroop[] DateGroop;
 
-    protected override async Task OnInitializedAsync()
-    {
-        DateGroop = await LogicGroop.GetForecastAsync(DateTime.Now);
-    }
+    public static List<LogicGroop> DateGroops = LogicGroop.GetStudents();
 }

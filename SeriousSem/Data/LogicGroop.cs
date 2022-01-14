@@ -20,15 +20,14 @@ namespace SeriousSem.Data
             this.faculty = faculty;
         }
 
-        public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+        public static List<LogicGroop> GetStudents()
         {
-            var rng = new Random();
-            return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = startDate.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            }).ToArray());
+            List<LogicGroop> list = new List<LogicGroop>();
+            list.Add(new LogicGroop("Ivan", "Ivanov", 222, "ab"));
+            list.Add(new LogicGroop("Bulka", "Bulov", 221, "abd"));
+            list.Add(new LogicGroop("Iskander", "Iskov", 202, "a"));
+            list.Add(new LogicGroop("Andrey", "Ibanov", 321, "b"));
+            return list;
         }
     }
 }
