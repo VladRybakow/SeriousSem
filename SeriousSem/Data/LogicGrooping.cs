@@ -72,7 +72,7 @@ namespace SeriousSem.Data
             this.manufacturer = manufacturer;
         }
 
-        public static List<LogicAuto> GetGames()
+        public static List<LogicAuto> GetAuto()
         {
             List<LogicAuto> list = new List<LogicAuto>();
             list.Add(new LogicAuto("Lada Granta", "2011", 600000, "АвтоВАЗ"));

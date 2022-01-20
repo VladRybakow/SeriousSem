@@ -2,14 +2,17 @@
 @using SeriousSem.Data
 @inject WeatherForecastService ForecastService
 
-<h3>Данные о группа</h3>
+<h2>Данные о группа</h2>
 
+<button class="btn btn-primary" @onclick="studl">Вывести список студентов</button>
+<button class="btn btn-primary" @onclick="carl">Вывести список машин</button>
+<button class="btn btn-primary" @onclick="gamel">Вывести список игр</button>
 
-@if (DateGroops == null)
+@if (gamelist == null && carlist == null && studlist == null)
 {
     <p><em>Loading...</em></p>
 }
-else
+else if (gamelist == null && carlist == null)
 {
     <table class="table">
         <thead>
@@ -21,7 +24,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var DateGrip in DateGroops)
+            @foreach (var DateGrip in studlist)
             {
                 <tr>
                     <td>@DateGrip.name</td>
@@ -33,8 +36,77 @@ else
         </tbody>
     </table>
 }
+else if (studlist == null && gamelist == null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Дата выпуска</th>
+                <th>Цена</th>
+                <th>Производитель</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var DateGrip in carlist)
+            {
+                <tr>
+                    <td>@DateGrip.name</td>
+                    <td>@DateGrip.date_of_manufacture</td>
+                    <td>@DateGrip.price</td>
+                    <td>@DateGrip.manufacturer</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (carlist == null && studlist == null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Дата выпуска</th>
+                <th>Цена</th>
+                <th>Издатель</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var DateGrip in gamelist)
+            {
+            <tr>
+                <td>@DateGrip.name</td>
+                <td>@DateGrip.date_of_manufacture</td>
+                <td>@DateGrip.price</td>
+                <td>@DateGrip.publisher</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
 
-    public static List<LogicGrooping> DateGroops = LogicGrooping.GetStudents();
+    public static List<LogicGrooping> studlist;
+    public static List<LogicGames> gamelist;
+    public static List<LogicAuto> carlist;
+
+    private void studl()
+    {
+        studlist = LogicGrooping.GetStudents();
+        carlist = null;
+        gamelist = null;
+    }
+    private void carl()
+    {
+        carlist = LogicAuto.GetAuto();
+        studlist = null;
+        gamelist = null;
+    }
+    private void gamel()
+    {
+        gamelist = LogicGames.GetGames();
+        carlist = null;
+        studlist = null;
+    }
 }
